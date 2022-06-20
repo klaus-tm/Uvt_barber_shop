@@ -153,7 +153,7 @@ void refuzare_comanda(string tip, string zi){
 }
 void citire_zi(string ziCautata){
     comenzi.clear();
-    ifstream fin("common/files/Comanda_nou.txt", std::ios_base::app);
+    ifstream fin("common/files/Comanda_acceptat.txt", std::ios_base::app);
     string tip, zi, status; int ora, pret, durata;
     while(fin>>tip){
         fin.ignore();
@@ -166,6 +166,9 @@ void citire_zi(string ziCautata){
     }
     fin.close();
     int i=1;
+    for(auto& comanda: comenzi){
+        comanda.setStadiu("accepted");
+    }
     for(auto& comanda: comenzi){
         if(comanda.getZi() == ziCautata){
             cout<<i<<" "<<comanda.getTip()<<" "<<comanda.getZi()<<" "<<comanda.getOra()<<" "<<comanda.getDurata()<<" "<<comanda.getPret()<<" "<<comanda.getStadiu()<<"\n";
@@ -319,6 +322,11 @@ int main(){
                 cout<<"=~=~=~=~=~=~=~=~=~=Appointments=~=~=~=~=~=~=~=~=~=\n\n\n"
                     <<"==================================================\n"
                     <<"Please insert the day you want to review: "; cin>>zi; cin.ignore();
+                cout<<"Appointments for "<<zi<<":\n";
+                citire_zi(zi);
+                cout<<"Press again to return to menu\n"
+                    <<"==================================================\n";
+                system("pause");
             }
             else if(user_choice == 3){
                 cout<<"Returning to main menu...";
