@@ -1,5 +1,6 @@
 #include <iostream>
 #include <stdlib.h>
+#include <windows.h>
 #include <time.h>
 #include <fstream>
 #include <list>
@@ -177,20 +178,21 @@ void citire_zi(string ziCautata){
     }
 }
 int main(){
+    HANDLE hc = GetStdHandle(STD_OUTPUT_HANDLE);
     int choice;
     while(1){
         //meniu
         system("cls");
 
         //screen
-        cout<<"=~=~=~=~=~=~=~=~=~=~=UVT barber shop=~=~=~=~=~=~=~=~=~=~=\n\n\n"
-            <<"=========================================================\n"
-            <<"Choose what you want to use:\n"
-            <<"1. Offers\n"
-            <<"2. Appointments\n"
-            <<"3. EXIT\n"
-            <<"=========================================================\n"
-            <<"Enter your choice:";
+        SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"UVT barber shop"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~=\n\n\n"
+        <<"=========================================================\n";
+        SetConsoleTextAttribute(hc, 7); cout<<"Choose what you want to use:\n";
+        SetConsoleTextAttribute(hc, 1); cout<<"1. Offers\n";
+        SetConsoleTextAttribute(hc, 3); cout<<"2. Appointments\n";
+        SetConsoleTextAttribute(hc, 5); cout<<"3. EXIT\n";
+        SetConsoleTextAttribute(hc, 2); cout<<"=========================================================\n";
+        SetConsoleTextAttribute(hc, 7); cout<<"Enter your choice:";
             //end of screen
 
         cin>>choice;
@@ -199,77 +201,77 @@ int main(){
             system("cls");
 
             //screen
-            cout<<"=~=~=~=~=~=~=~=~=~=~=Offers=~=~=~=~=~=~=~=~=~=~=\n\n\n"
-                <<"================================================\n"
-                <<"Choose what you want to do:\n"
-                <<"1. Create Offer\n"
-                <<"2. Modify an offer\n"
-                <<"3. Delete an offer\n"
-                <<"4. GO BACK TO MENU\n"
-                <<"================================================\n"
-                <<"Enter your choice:";
+            SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Offers"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~=\n\n\n"
+            <<"================================================\n";
+            SetConsoleTextAttribute(hc, 7); cout<<"Choose what you want to do:\n";
+            SetConsoleTextAttribute(hc, 1); cout<<"1. Create Offer\n";
+            SetConsoleTextAttribute(hc, 3); cout<<"2. Modify an offer\n";
+            SetConsoleTextAttribute(hc, 5); cout<<"3. Delete an offer\n";
+            SetConsoleTextAttribute(hc, 7); cout<<"4. GO BACK TO MENU\n";
+            SetConsoleTextAttribute(hc, 2); cout<<"================================================\n";
+            SetConsoleTextAttribute(hc, 7); cout<<"Enter your choice:";
             cin>>user_choice;
             if(user_choice == 1){
                 system("cls");
                 string tip; int pret, durata;
                 //screen
-                cout<<"=~=~=~=~=~=~=~=~=~=~=Offers=~=~=~=~=~=~=~=~=~=~=\n\n\n"
-                    <<"================================================\n"
-                    <<"PLease insert the type of cut:\n"; cin>>tip; cin.ignore();
-                cout<<"Please insert the price of the cut:\n"; cin>>pret;
-                cout<<"PLease insert the duration of the cut\n"; cin>>durata;
+                SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Offers"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~=\n\n\n"
+                <<"================================================\n";
+                SetConsoleTextAttribute(hc, 1); cout<<"PLease insert the type of cut:\n"; cin>>tip; cin.ignore();
+                SetConsoleTextAttribute(hc, 3); cout<<"Please insert the price of the cut:\n"; cin>>pret;
+                SetConsoleTextAttribute(hc, 5); cout<<"PLease insert the duration of the cut\n"; cin>>durata;
                 cooldown(1);
                 creare_oferta(Oferte(tip, pret, durata));
-                cout<<"New offer added! Press again to return to menu\n";
-                cout<<"================================================\n";
+                SetConsoleTextAttribute(hc, 7); cout<<"New offer added! Press again to return to menu\n";
+                SetConsoleTextAttribute(hc, 2); cout<<"================================================\n";
                 system("pause");
             }
             else if(user_choice == 2) {
                 system("cls");
                 string modify, tip;
-                cout<<"=~=~=~=~=~=~=~=~=~=~=Offers=~=~=~=~=~=~=~=~=~=~=\n\n\n"
-                    <<"================================================\n"
-                    <<"Current offers:\n";
+                SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Offers"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~=\n\n\n"
+                <<"================================================\n";
+                SetConsoleTextAttribute(hc, 7); cout<<"Current offers:\n";
                 citire_oferte();
-                cout<<"Please insert the offer you want to modify: "; cin>>tip; cin.ignore();
-                cout<<"Please insert what modification you want to make(price/duration): "; cin>>modify;
+                SetConsoleTextAttribute(hc, 1); cout<<"Please insert the offer you want to modify: "; cin>>tip; cin.ignore();
+                SetConsoleTextAttribute(hc, 3); cout<<"Please insert what modification you want to make(price/duration): "; cin>>modify;
                 if(modify == "price"){
                     int pret;
-                    cout<<"Please insert the new price: "; cin>>pret;
+                    SetConsoleTextAttribute(hc, 5); cout<<"Please insert the new price: "; cin>>pret;
                     modificare_pret(tip, pret);
                     cooldown(1);
-                    cout<<"Modification complete! Press again to return to menu\n";
-                    cout<<"================================================\n";
+                    SetConsoleTextAttribute(hc, 7); cout<<"Modification complete! Press again to return to menu\n";
+                    SetConsoleTextAttribute(hc, 2); cout<<"================================================\n";
                 }
                 else if(modify == "duration"){
                     int durata;
-                    cout<<"Please insert the new duration: "; cin>>durata;
+                    SetConsoleTextAttribute(hc, 5); cout<<"Please insert the new duration: "; cin>>durata;
                     modificare_durata(tip, durata);
                     cooldown(1);
-                    cout<<"Modification complete! Press again to return to menu\n";
-                    cout<<"================================================\n";
+                    SetConsoleTextAttribute(hc, 7); cout<<"Modification complete! Press again to return to menu\n";
+                    SetConsoleTextAttribute(hc, 2); cout<<"================================================\n";
                 }
                 system("pause");
             }
             else if(user_choice == 3){
                 system("cls");
                 string tip;
-                cout<<"=~=~=~=~=~=~=~=~=~=~=Offers=~=~=~=~=~=~=~=~=~=~=\n\n\n"
-                    <<"================================================\n"
-                    <<"Current offers:\n";
+                SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Offers"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~=\n\n\n"
+                <<"================================================\n";
+                SetConsoleTextAttribute(hc, 7); cout<<"Current offers:\n";
                 citire_oferte();
-                cout<<"Please insert the offer you want to delete: "; cin>>tip; cin.ignore();
+                SetConsoleTextAttribute(hc, 1); cout<<"Please insert the offer you want to delete: "; cin>>tip; cin.ignore();
                 string answer;
-                cout<<"Are you sure you want to delete "<<tip<<"? "; cin>>answer;
+                SetConsoleTextAttribute(hc, 3); cout<<"Are you sure you want to delete "<<tip<<"? "; cin>>answer;
                 if(answer == "yes"){
                     stergere_oferta(tip);
                     cooldown(1);
-                    cout<<"Erase complete! Press again to return to menu\n"
-                        <<"================================================\n";
+                    SetConsoleTextAttribute(hc, 7); cout<<"Erase complete! Press again to return to menu\n";
+                    SetConsoleTextAttribute(hc, 2); cout<<"================================================\n";
                 }
                 else{
-                    cout<<"Press again to return to menu\n"
-                        <<"================================================\n";
+                    SetConsoleTextAttribute(hc, 7);cout<<"Erase aborted! Press again to return to menu\n";
+                    SetConsoleTextAttribute(hc, 2); cout<<"================================================\n";
                 }
                 system("pause");
             }
@@ -283,49 +285,49 @@ int main(){
             system("cls");
 
             //screen
-            cout<<"=~=~=~=~=~=~=~=~=~=Appointments=~=~=~=~=~=~=~=~=~=\n\n\n"
-                <<"==================================================\n"
-                <<"Choose what you want to do:\n"
-                <<"1. Accept/Decline appointments\n"
-                <<"2. View appointments for a certain day\n"
-                <<"3. GO BACK TO MENU\n"
-                <<"==================================================\n"
-                <<"Enter your choice:";
+            SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Appointments"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=\n\n\n"
+            <<"==================================================\n";
+            SetConsoleTextAttribute(hc, 7); cout<<"Choose what you want to do:\n";
+            SetConsoleTextAttribute(hc, 1); cout<<"1. Accept/Decline appointments\n";
+            SetConsoleTextAttribute(hc, 3); cout<<"2. View appointments for a certain day\n";
+            SetConsoleTextAttribute(hc, 5); cout<<"3. GO BACK TO MENU\n";
+            SetConsoleTextAttribute(hc, 2); cout<<"==================================================\n";
+            SetConsoleTextAttribute(hc, 7); cout<<"Enter your choice:";
             cin>>user_choice;
             if(user_choice == 1){
                 system("cls");
                 string tip, zi, status;
-                cout<<"=~=~=~=~=~=~=~=~=~=Appointments=~=~=~=~=~=~=~=~=~=\n\n\n"
-                    <<"==================================================\n"
-                    <<"Current appointments:\n";
+                SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Appointments"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=\n\n\n"
+                <<"==================================================\n";
+                SetConsoleTextAttribute(hc, 7); cout<<"Current appointments:\n";
                 citire_comenzi();
-                cout<<"Please insert the appointment you want to accept/decline: "; cin>>tip; cin.ignore();
-                cout<<"Please insert the day of the appointment: "; cin>>zi; cin.ignore();
-                cout<<"Please insert what you want to do with the appointment(accept/decline): "; cin>>status; cin.ignore();
+                SetConsoleTextAttribute(hc, 1); cout<<"Please insert the appointment you want to accept/decline: "; cin>>tip; cin.ignore();
+                SetConsoleTextAttribute(hc, 3); cout<<"Please insert the day of the appointment: "; cin>>zi; cin.ignore();
+                SetConsoleTextAttribute(hc, 5); cout<<"Please insert what you want to do with the appointment(accept/decline): "; cin>>status; cin.ignore();
                 if(status == "accept"){
                     acceptare_comanda(tip, zi);
                     cooldown(1);
-                    cout<<"Modification complete! Press again to return to menu\n";
-                    cout<<"==================================================\n";
+                    SetConsoleTextAttribute(hc, 7); cout<<"Modification complete! Press again to return to menu\n";
+                    SetConsoleTextAttribute(hc, 2); cout<<"==================================================\n";
                 }
                 else if(status == "decline"){
                     refuzare_comanda(tip, zi);
                     cooldown(1);
-                    cout<<"Modification complete! Press again to return to menu\n";
-                    cout<<"==================================================\n";
+                    SetConsoleTextAttribute(hc, 7); cout<<"Modification complete! Press again to return to menu\n";
+                    SetConsoleTextAttribute(hc, 2); cout<<"==================================================\n";
                 }
                 system("pause");
             }
             else if(user_choice == 2){
                 system("cls");
                 string zi;
-                cout<<"=~=~=~=~=~=~=~=~=~=Appointments=~=~=~=~=~=~=~=~=~=\n\n\n"
-                    <<"==================================================\n"
-                    <<"Please insert the day you want to review: "; cin>>zi; cin.ignore();
-                cout<<"Appointments for "<<zi<<":\n";
+                SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Appointments"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=\n\n\n"
+                <<"==================================================\n";
+                SetConsoleTextAttribute(hc, 1); cout<<"Please insert the day you want to review: "; cin>>zi; cin.ignore();
+                SetConsoleTextAttribute(hc, 7); cout<<"Appointments for "<<zi<<":\n";
                 citire_zi(zi);
-                cout<<"Press again to return to menu\n"
-                    <<"==================================================\n";
+                cout<<"Press again to return to menu\n";
+                SetConsoleTextAttribute(hc, 2); cout<<"==================================================\n";
                 system("pause");
             }
             else if(user_choice == 3){

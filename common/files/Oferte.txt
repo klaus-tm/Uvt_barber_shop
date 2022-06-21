@@ -1,2 +1,2 @@
 lung 13 11
-spalat 20 30
+long 10 30
