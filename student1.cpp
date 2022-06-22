@@ -23,6 +23,22 @@ void cooldown(int seconds){
     } while(elapsed < period);
 }
 //lucru la oferte
+int verificare_duplicate(string tip_cautat){
+    oferte.clear();
+    ifstream fin("common/files/Oferte.txt", std::ios_base::app);
+    string tip; int pret, durata;
+    while(fin>>tip){
+        fin.ignore();
+        fin>>pret>>durata;
+        oferte.push_back(Oferte(tip, pret, durata));
+    }
+    fin.close();
+    for(auto& oferta: oferte){
+        if(oferta.getTip() == tip_cautat)
+            return 1;
+    }
+    return 0;
+}
 void creare_oferta(Oferte o){
     ofstream fout("common/files/Oferte.txt", std::ios_base::app);
     fout<<o.getTip()<<" "<<o.getPret()<<" "<<o.getDurata()<<"\n";
@@ -212,18 +228,27 @@ int main(){
             SetConsoleTextAttribute(hc, 7); cout<<"Enter your choice:";
             cin>>user_choice;
             if(user_choice == 1){
-                system("cls");
-                string tip; int pret, durata;
+                string tip; int pret, durata; int k=0;
                 //screen
-                SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Offers"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~=\n\n\n"
-                <<"================================================\n";
-                SetConsoleTextAttribute(hc, 1); cout<<"PLease insert the type of cut:\n"; cin>>tip; cin.ignore();
-                SetConsoleTextAttribute(hc, 3); cout<<"Please insert the price of the cut:\n"; cin>>pret;
-                SetConsoleTextAttribute(hc, 5); cout<<"PLease insert the duration of the cut\n"; cin>>durata;
-                cooldown(1);
-                creare_oferta(Oferte(tip, pret, durata));
-                SetConsoleTextAttribute(hc, 7); cout<<"New offer added! Press again to return to menu\n";
-                SetConsoleTextAttribute(hc, 2); cout<<"================================================\n";
+                while(k == 0){
+                    system("cls");
+                    SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~="; SetConsoleTextAttribute(hc, 4); cout<<"Offers"; SetConsoleTextAttribute(hc, 2); cout<<"=~=~=~=~=~=~=~=~=~=~=\n\n\n"
+                    <<"================================================\n";
+                    SetConsoleTextAttribute(hc, 1); cout<<"PLease insert the type of cut:\n"; cin>>tip; cin.ignore();
+                    if(verificare_duplicate(tip) == 0){
+                        SetConsoleTextAttribute(hc, 3); cout<<"Please insert the price of the cut:\n"; cin>>pret;
+                        SetConsoleTextAttribute(hc, 5); cout<<"PLease insert the duration of the cut\n"; cin>>durata;
+                        cooldown(1);
+                        creare_oferta(Oferte(tip, pret, durata)); k++;
+                        SetConsoleTextAttribute(hc, 7); cout<<"New offer added! Press again to return to menu\n";
+                        SetConsoleTextAttribute(hc, 2); cout<<"================================================\n";
+                    }
+                    else{
+                        SetConsoleTextAttribute(hc, 7); cout<<"PLease insert a non duplicate offer!\n";
+                        system("pause");
+                    }
+                }
+
                 system("pause");
             }
             else if(user_choice == 2) {
