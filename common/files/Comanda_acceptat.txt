@@ -1,2 +1,2 @@
-scurt marti 13 25 15 accepted
-lung luni 12 10 25 accepted
+
+scurt marti 12 25 30 accepted
